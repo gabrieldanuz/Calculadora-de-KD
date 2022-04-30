@@ -1,29 +1,38 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, Image, FlatList } from 'react-native';
 
-export default function App() {
+import ResultKDA from './src/ResultKDA';
+
+export default function App () {
   const [kill, setKill] = useState(0);
   const [death, setDeath] = useState(0);
   const [kdAtual, setKdAtual] = useState(0);
   const [kdPrevisto, setKdPrevisto] = useState(0);
+  const [mensagem, setMensagem] = ('Sabe jogar Noob?')
 
   async function calcular(){
-    if(kill === 0 || death === 0) {
-      alert('Favor acrescentar um valor');
+    if(kill === 0 || death === 0 || kill === '' || death === '') {
+      alert('Vishhh, esqueceu de preencher, parça!');
       return;
     }
 
-    let resultado = (kill/(kill+death))*100;
-    setKdAtual(resultado);
-    console.log(resultado)
+    let soma = Number(kill) + Number(death);
+    let soma2 = (kill*100);
+    let resultado = (soma2 / soma).toFixed(2);
 
+    setKdAtual(resultado)
+
+    console.log(resultado)
     Keyboard.dismiss();
   }  
 
-  async function previsao(){
+  async function limparKdAtual(){
+    setKdAtual('')
+    alert('Tá na mão, noob!')
+  }
 
-    let resultadoPrevisao = (kill/(kill+death))*100;
-    setKdPrevisto(resultado);
+  async function previsao(){
+    //setKdPrevisto(resultado);
     //console.log(resultado)
 
     Keyboard.dismiss();
@@ -62,6 +71,15 @@ return (
             <Text style={styles.botaoTexto}>Calcular</Text>
           </TouchableOpacity>
 
+        <View style={styles.areaResultado}>
+          <Text style={{fontWeight: 'bold'}}>KD:</Text>
+        <ResultKDA ResultKDA={kdAtual} />
+        </View>
+        <TouchableOpacity style={styles.botaoArea} 
+          onPress={limparKdAtual}
+          >
+            <Text style={styles.botaoTexto}>Limpar</Text>
+          </TouchableOpacity>
     </View>
 
     
@@ -71,24 +89,25 @@ return (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#101215',
+    backgroundColor: '#000',
     alignItems: 'center',
     paddingTop: 50,
   },
   Image: {
     width: '90%',
-    height: 400,
+    height: 350,
     marginBottom: 10
   },
   areaKill: {
     width: '90%',
-    backgroundColor: '#F9F9F9',
+    backgroundColor: '#FFF',
     paddingBottom: 9,
-    paddingTop: 9
+    paddingTop: 9,
+    padding: 5
   },
     titulo: {
     fontSize: 15,
-    color: '#000',
+    color: '#141729',
     paddingTop: 5,
     paddingLeft: 5
   },
@@ -114,4 +133,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 25
   },
+  kdAtual:{
+    marginTop: 10,
+    color: '#FFF',
+    fontSize: 18,
+  }
 });
