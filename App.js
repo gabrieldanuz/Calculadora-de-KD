@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, Image, FlatList } from 'react-native';
 
 import ResultKDA from './src/ResultKDA';
+import ResultKDPrevisao from './src/ResultKDPrevisao';
 
 export default function App () {
   const [kill, setKill] = useState(0);
@@ -22,22 +23,21 @@ export default function App () {
 
     setKdAtual(resultado)
 
-    console.log(resultado)
+    let subirKd = Number(kill) + Number(death) 
+    let resultadoPrevisao = (subirKd / 100 ).toFixed(0);
+    console.log(resultadoPrevisao)
+
+    setKdPrevisto(resultadoPrevisao)
+
     Keyboard.dismiss();
   }  
 
   async function limparKdAtual(){
     setKdAtual('')
+    setKdPrevisto('')
     alert('Tá na mão, noob!')
   }
-
-  async function previsao(){
-    //setKdPrevisto(resultado);
-    //console.log(resultado)
-
-    Keyboard.dismiss();
-  }  
-
+ 
 return (
     <View style={styles.container}>
       <Image
@@ -74,6 +74,8 @@ return (
         <View style={styles.areaResultado}>
           <Text style={{fontWeight: 'bold'}}>KD:</Text>
         <ResultKDA ResultKDA={kdAtual} />
+            <Text style={{fontWeight: 'bold', marginTop: 5}}>Previsão para aumentar o KD: </Text>
+            <ResultKDPrevisao ResultKDPrevisao={kdPrevisto} />
         </View>
         <TouchableOpacity style={styles.botaoArea} 
           onPress={limparKdAtual}
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000',
     alignItems: 'center',
-    paddingTop: 50,
+    paddingTop: 10,
   },
   Image: {
     width: '90%',
