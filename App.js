@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, Image, FlatList } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import ResultKDA from './src/ResultKDA';
 import ResultKDPrevisao from './src/ResultKDPrevisao';
@@ -82,6 +83,13 @@ return (
           >
             <Text style={styles.botaoTexto}>Limpar</Text>
           </TouchableOpacity>
+
+        
+        <TouchableOpacity>
+        <Ionicons style={{marginTop: 5}} name="logo-instagram" size={24} color="#FFF" />
+        </TouchableOpacity>
+          
+          
     </View>
 
     
