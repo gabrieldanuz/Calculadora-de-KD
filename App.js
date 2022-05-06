@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, Image, FlatList, Linking} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import ResultKDA from './src/ResultKDA';
@@ -85,7 +85,9 @@ return (
           </TouchableOpacity>
 
         
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => {Linking.openURL("https://www.instagram.com/gabrield_o/")}}
+        >
         <Ionicons style={{marginTop: 5}} name="logo-instagram" size={24} color="#FFF" />
         </TouchableOpacity>
           
